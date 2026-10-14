@@ -1,0 +1,31 @@
+# FastAPI / worker 在宿主机跑。这里只起 Postgres 和 Redis。
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: poetry-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: poetry
+      POSTGRES_PASSWORD: poetry
+      POSTGRES_DB: poetry
+    ports:
+      - "5432:5432"
+    volumes:
+      - E:/poetry-assistant/data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U poetry -d poetry"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: poetry-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5

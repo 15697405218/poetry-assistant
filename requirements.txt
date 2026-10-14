@@ -1,0 +1,54 @@
+# Windows：
+#   set TOKENIZERS_PARALLELISM=false
+#   （app/config.py 已 setdefault；不关的话 rust tokenizers 可能 0xC0000005 把进程打崩）
+# uvicorn 不要加 --reload：Chroma HNSW 索引会在 reload 子进程里锁文件 / 直接崩。
+# Tavily 走标准库 urllib.request，没有 tavily SDK，不要 pip install tavily。
+
+# API
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+python-multipart==0.0.17
+pydantic==2.14.0
+pydantic-settings==2.6.1
+python-dotenv==1.0.1
+pyyaml==6.0.2
+
+# Auth（OAuth2PasswordRequestForm 需要 python-multipart）
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+
+# Postgres / Redis
+sqlalchemy==2.0.36
+psycopg[binary]==3.2.3
+redis==5.2.1
+
+# LLM（火山 Ark，OpenAI 兼容 SDK）
+openai==1.58.1
+httpx==0.28.1
+
+# Agent
+langchain-core==0.3.28
+langgraph==0.2.65
+
+# RAG / 向量 / 精排
+chromadb==0.5.23
+sentence-transformers==3.3.1
+transformers==4.57.6
+huggingface-hub==0.36.2
+zhconv==1.4.3
+
+# torch 很大。本机实际是 2.6.0+cu124，不要把 nvidia-* CUDA 轮子整包 freeze 进来。
+# PyPI 默认 CPU 轮子。GPU 请先装 CUDA 轮子再装其余：
+#   pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+torch==2.6.0
+
+# 模型下载：HF 失败时 scripts/download_embedding.py / download_reranker.py 走 ModelScope
+modelscope==1.40.2
+
+# 测试
+pytest==8.3.4
+
+# 离线术语挖掘（scripts/extract_terms_ner.py；线上 chat 不用）
+# knowledgator/gliner-x-small
+gliner==0.2.29

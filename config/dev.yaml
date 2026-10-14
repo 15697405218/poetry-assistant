@@ -1,0 +1,16 @@
+# 开发超参。密钥仍走 .env，这里只放检索/记忆可调数字。
+# 启动时若存在且 APP_CONFIG 指向本文件，会覆盖 Settings 里同名项。
+retrieve_top_k: 5
+recall_k: 15
+# BGE 用 cosine，距离大约 0~2，不再用 text2vec 的 L2 300
+poem_distance_max: 1.2
+raw_token_limit: 100000
+keep_low: 15
+index_version: v2
+embedding_model: BAAI/bge-large-zh-v1.5
+reranker_model: BAAI/bge-reranker-large
+hnsw_search_ef: 64
+# worker 同时跑 retrieve/generate 的上限，默认 1 避免 GPU 重叠
+gpu_max_inflight: 1
+job_ttl_seconds: 3600
+job_wait_seconds: 180

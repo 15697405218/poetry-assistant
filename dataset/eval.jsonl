@@ -1,0 +1,42 @@
+{"id": "alias-fangweng", "query": "放翁是谁", "gold_authors": ["陆游"], "gold_titles": [], "gold_keywords": ["陆游", "放翁"]}
+{"id": "alias-wuguan", "query": "务观写过哪些诗", "gold_authors": ["陆游"], "gold_titles": [], "gold_keywords": ["陆游"]}
+{"id": "alias-laosu", "query": "老苏那首中秋问月的", "gold_authors": ["苏轼"], "gold_titles": ["水调歌头"], "gold_keywords": ["明月", "苏轼"]}
+{"id": "cipai-yulinling", "query": "雨霖铃的意象", "gold_authors": ["柳永"], "gold_titles": ["雨霖铃"], "gold_keywords": ["寒蝉", "长亭", "柳永"]}
+{"id": "title-shier", "query": "示儿是谁写的", "gold_authors": ["陆游"], "gold_titles": ["示儿"], "gold_keywords": ["死去元知万事空"]}
+{"id": "title-jingyesi", "query": "床前明月光是哪首", "gold_authors": ["李白"], "gold_titles": ["静夜思"], "gold_keywords": ["疑是地上霜"]}
+{"id": "title-chunxiao", "query": "春眠不觉晓下一句", "gold_authors": ["孟浩然"], "gold_titles": ["春晓"], "gold_keywords": ["处处闻啼鸟"]}
+{"id": "title-guanque", "query": "欲穷千里目更上一层楼出处", "gold_authors": ["王之涣"], "gold_titles": ["登鹳雀楼"], "gold_keywords": ["白日依山尽"]}
+{"id": "title-jiangjinjiu", "query": "将进酒谁写的", "gold_authors": ["李白"], "gold_titles": ["将进酒"], "gold_keywords": ["黄河之水天上来"]}
+{"id": "title-maowu", "query": "安得广厦千万间哪首诗", "gold_authors": ["杜甫"], "gold_titles": ["茅屋为秋风所破歌"], "gold_keywords": ["大庇天下寒士"]}
+{"id": "title-pipa", "query": "同是天涯沦落人哪首", "gold_authors": ["白居易"], "gold_titles": ["琵琶行"], "gold_keywords": ["江州司马"]}
+{"id": "title-huanghelou", "query": "黄鹤楼崔颢那首", "gold_authors": ["崔颢"], "gold_titles": ["黄鹤楼"], "gold_keywords": ["昔人已乘黄鹤去"]}
+{"id": "title-wanglu", "query": "飞流直下三千尺", "gold_authors": ["李白"], "gold_titles": ["望庐山瀑布"], "gold_keywords": ["疑是银河落九天"]}
+{"id": "title-baidi", "query": "朝辞白帝彩云间", "gold_authors": ["李白"], "gold_titles": ["早发白帝城"], "gold_keywords": ["千里江陵一日还"]}
+{"id": "title-minnong", "query": "谁知盘中餐粒粒皆辛苦", "gold_authors": ["李绅"], "gold_titles": ["悯农"], "gold_keywords": ["锄禾日当午"]}
+{"id": "title-jiangxue", "query": "孤舟蓑笠翁独钓寒江雪", "gold_authors": ["柳宗元"], "gold_titles": ["江雪"], "gold_keywords": ["千山鸟飞绝"]}
+{"id": "title-fengqiao", "query": "夜半钟声到客船", "gold_authors": ["张继"], "gold_titles": ["枫桥夜泊"], "gold_keywords": ["月落乌啼"]}
+{"id": "title-youziyin", "query": "谁言寸草心报得三春晖", "gold_authors": ["孟郊"], "gold_titles": ["游子吟"], "gold_keywords": ["慈母手中线"]}
+{"id": "title-denggao", "query": "无边落木萧萧下", "gold_authors": ["杜甫"], "gold_titles": ["登高"], "gold_keywords": ["不尽长江滚滚来"]}
+{"id": "title-chunwang", "query": "国破山河在城春草木深", "gold_authors": ["杜甫"], "gold_titles": ["春望"], "gold_keywords": ["感时花溅泪"]}
+{"id": "title-shudaonan", "query": "蜀道难难于上青天", "gold_authors": ["李白"], "gold_titles": ["蜀道难"], "gold_keywords": ["噫吁嚱"]}
+{"id": "cipai-shui diao", "query": "水调歌头明月几时有", "gold_authors": ["苏轼"], "gold_titles": ["水调歌头"], "gold_keywords": ["把酒问青天"]}
+{"id": "cipai-niannujiao", "query": "大江东去浪淘尽哪首词", "gold_authors": ["苏轼"], "gold_titles": ["念奴娇"], "gold_keywords": ["赤壁"]}
+{"id": "cipai-shengshengman", "query": "寻寻觅觅冷冷清清是谁的词", "gold_authors": ["李清照"], "gold_titles": ["声声慢"], "gold_keywords": ["凄凄惨惨戚戚"]}
+{"id": "qu-tianjingsha", "query": "枯藤老树昏鸦", "gold_authors": ["马致远"], "gold_titles": ["天净沙"], "gold_keywords": ["小桥流水人家"]}
+{"id": "title-qiantang", "query": "几处早莺争暖树", "gold_authors": ["白居易"], "gold_titles": ["钱塘湖春行"], "gold_keywords": ["谁家新燕啄春泥"]}
+{"id": "title-lingding", "query": "人生自古谁无死", "gold_authors": ["文天祥"], "gold_titles": ["过零丁洋"], "gold_keywords": ["留取丹心照汗青"]}
+{"id": "title-shihui", "query": "粉骨碎身浑不怕", "gold_authors": ["于谦"], "gold_titles": ["石灰吟"], "gold_keywords": ["要留清白在人间"]}
+{"id": "title-jihai", "query": "落红不是无情物", "gold_authors": ["龚自珍"], "gold_titles": ["己亥杂诗"], "gold_keywords": ["化作春泥更护花"]}
+{"id": "title-xiling", "query": "不识庐山真面目", "gold_authors": ["苏轼"], "gold_titles": ["题西林壁"], "gold_keywords": ["只缘身在此山中"]}
+{"id": "title-yinhu", "query": "欲把西湖比西子", "gold_authors": ["苏轼"], "gold_titles": ["饮湖上初晴后雨"], "gold_keywords": ["淡妆浓抹"]}
+{"id": "title-huichong", "query": "春江水暖鸭先知", "gold_authors": ["苏轼"], "gold_titles": ["惠崇春江晚景"], "gold_keywords": ["竹外桃花三两枝"]}
+{"id": "title-wanglun", "query": "桃花潭水深千尺", "gold_authors": ["李白"], "gold_titles": ["赠汪伦"], "gold_keywords": ["不及汪伦送我情"]}
+{"id": "title-songmeng", "query": "孤帆远影碧空尽", "gold_authors": ["李白"], "gold_titles": ["黄鹤楼送孟浩然之广陵"], "gold_keywords": ["唯见长江天际流"]}
+{"id": "title-leyouyuan", "query": "乐游原晚上那首", "gold_authors": ["李商隐"], "gold_titles": ["乐游原"], "gold_keywords": ["夕阳无限好"]}
+{"id": "title-wuti", "query": "春蚕到死丝方尽", "gold_authors": ["李商隐"], "gold_titles": ["无题"], "gold_keywords": ["蜡炬成灰泪始干"]}
+{"id": "title-duange", "query": "对酒当歌人生几何", "gold_authors": ["曹操"], "gold_titles": ["短歌行"], "gold_keywords": ["何以解忧"]}
+{"id": "title-caoyuan", "query": "离离原上草一岁一枯荣", "gold_authors": ["白居易"], "gold_titles": ["赋得古原草送别"], "gold_keywords": ["野火烧不尽"]}
+{"id": "title-huixiang", "query": "少小离家老大回", "gold_authors": ["贺知章"], "gold_titles": ["回乡偶书"], "gold_keywords": ["乡音无改鬓毛衰"]}
+{"id": "title-jingcisi", "query": "接天莲叶无穷碧", "gold_authors": ["杨万里"], "gold_titles": ["晓出净慈寺送林子方"], "gold_keywords": ["映日荷花别样红"]}
+{"id": "alias-qinglian", "query": "青莲居士最有名的那首月夜", "gold_authors": ["李白"], "gold_titles": ["静夜思"], "gold_keywords": ["李白"]}
+{"id": "alias-shaoling", "query": "少陵野老春望", "gold_authors": ["杜甫"], "gold_titles": ["春望"], "gold_keywords": ["杜甫"]}

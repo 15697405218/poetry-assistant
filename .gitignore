@@ -1,0 +1,25 @@
+venv/
+.env
+__pycache__/
+*.pyc
+*.log
+.pytest_cache/
+.hypothesis/
+.cursor/
+
+data/chroma/
+data/postgres/
+data/index_version.json
+
+# 离线术语挖掘中间产物（线上只用 terms.draft.json）
+data/terms.ner.*
+data/terms.raw.json
+data/terms.notes.json
+data/terms.authors.json
+
+# 评测跑出来的落盘，金标在 eval.jsonl / chat_eval.jsonl
+dataset/chat_eval_last.jsonl
+dataset/chat_eval_last_rest.jsonl
+dataset/chat_eval_saved.jsonl
+dataset/chat_eval_part1.jsonl
+dataset/chat_eval_report.md

@@ -1,0 +1,20 @@
+{"id": "c-jingye", "query": "床前明月光是李白哪一首啊", "must": ["静夜思"], "expect_tools": "required", "kind": "出处"}
+{"id": "c-chunxiao", "query": "春眠不觉晓下一句是啥", "must": ["处处闻啼鸟"], "expect_tools": "required", "kind": "下一句"}
+{"id": "c-guanque", "query": "欲穷千里目更上一层楼出处告诉我", "must": ["登鹳雀楼"], "any": ["王之涣", "朱斌"], "expect_tools": "required", "kind": "出处"}
+{"id": "c-fangweng", "query": "放翁是谁呀", "must": ["陆游"], "expect_tools": "required", "tool": "bio", "kind": "别称"}
+{"id": "c-yulin", "query": "雨霖铃这首词主要写什么意象", "must": ["柳永"], "expect_tools": "required", "kind": "赏析检索"}
+{"id": "c-qinglian", "query": "青莲居士最有名的那首月亮诗是哪首", "must": ["李白"], "any": ["静夜思", "月下独酌", "把酒问月"], "expect_tools": "required", "kind": "别称"}
+{"id": "c-pipa", "query": "同是天涯沦落人是谁写的", "must": ["白居易"], "expect_tools": "required", "kind": "出处"}
+{"id": "c-fengqiao", "query": "夜半钟声到客船这句啥意思", "must": ["张继"], "expect_tools": "optional", "kind": "赏析"}
+{"id": "c-shui", "query": "苏轼中秋那首水调歌头在讲什么", "must": ["苏轼"], "expect_tools": "required", "kind": "赏析检索"}
+{"id": "c-lushan", "query": "不识庐山真面目下一句", "must": ["只缘身在此山中"], "expect_tools": "required", "kind": "下一句"}
+{"id": "c-minnong", "query": "粒粒皆辛苦是哪首诗来着", "must": ["悯农"], "expect_tools": "required", "kind": "出处"}
+{"id": "c-shengsheng", "query": "李清照声声慢原文背一下前几句", "must": ["寻寻觅觅"], "expect_tools": "required", "kind": "原文"}
+{"id": "c-wanglun", "query": "孤帆远影碧空尽是送谁走", "must": ["孟浩然"], "expect_tools": "required", "kind": "内容"}
+{"id": "c-hi", "query": "你好", "must": [], "expect_tools": "forbidden", "forbid_cite": true, "kind": "闲聊"}
+{"id": "c-weather", "query": "今天北京天气怎么样", "must": [], "expect_tools": "forbidden_lib", "forbid_cite": true, "kind": "非诗词"}
+{"id": "c-write", "query": "帮我写一首边塞绝句，不要照抄名篇", "must": [], "expect_tools": "optional", "kind": "创作"}
+{"id": "c-baihua", "query": "把静夜思改成大白话", "must": [], "any": ["床前", "地上霜", "月亮"], "expect_tools": "optional", "kind": "改写"}
+{"id": "c-dispute", "query": "登鹳雀楼到底是王之涣还是朱斌写的", "any": ["王之涣", "朱斌"], "expect_tools": "required", "kind": "争议"}
+{"id": "c-who-better", "query": "李白和杜甫谁写诗更好啊", "must": [], "expect_tools": "optional", "kind": "观点"}
+{"id": "c-yu", "query": "余光中乡愁那首原文给我", "must": [], "expect_tools": "optional", "forbid_cite": true, "kind": "库外"}
