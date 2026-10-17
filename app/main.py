@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from app.observability import setup_logging
 from app.db import Base, engine, ensure_schema
 
-from app.models import User, Conversation, Message, Poem, PoemKey
+from app.models import User, Conversation, Message, Poem, PoemKey, Author
 
 from app.api.auth import router as auth_router
 
@@ -30,6 +30,7 @@ def health_check():
         "redis": redis_ok(),
         "index_version": settings.index_version,
         "fts_poems": _fts_count(),
+        "vector_poems": _vector_count(),
         "queue": queue_depth(),
     }
 
@@ -38,3 +39,9 @@ def _fts_count() -> int:
     from app.services.fts import poem_count
 
     return poem_count()
+
+
+def _vector_count() -> int:
+    from app.services.vector_store import vector_poem_count
+
+    return vector_poem_count()

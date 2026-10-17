@@ -102,3 +102,7 @@ def _loop_pool(n: int) -> None:
 
 def main() -> None:
     run_forever()
+
+
+if __name__ == "__main__":
+    main()

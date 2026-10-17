@@ -281,3 +281,7 @@ if __name__ == "__main__":
     from app.services.fts_ingest import ingest_fts
 
     ingest_fts()
+    from app.services.chroma_migrate import migrate_from_chroma
+
+    print("把刚写入的 Chroma 向量拷进 Postgres", flush=True)
+    migrate_from_chroma()

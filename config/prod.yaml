@@ -10,3 +10,9 @@ hnsw_search_ef: 64
 gpu_max_inflight: 1
 job_ttl_seconds: 3600
 job_wait_seconds: 180
+chat_temperature: 0.35
+chat_top_p: 0.9
+disambiguate_temperature: 0
+disambiguate_max_tokens: 256
+summarize_temperature: 0
+summarize_max_tokens: 400

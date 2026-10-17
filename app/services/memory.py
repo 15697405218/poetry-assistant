@@ -64,7 +64,8 @@ def _summarize(old: str, chunk: str) -> str | None:
                 {"role": "system", "content": SUMMARIZE_SYSTEM},
                 {"role": "user", "content": "\n\n".join(user)},
             ],
-            temperature=0,
+            temperature=settings.summarize_temperature,
+            max_tokens=settings.summarize_max_tokens,
         )
     except (AuthError, RateLimitError, UpstreamError, Exception):
         return None

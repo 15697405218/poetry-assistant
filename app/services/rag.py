@@ -1,8 +1,9 @@
-from pathlib import Path
 from app.config import settings
-import chromadb
-from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
 from zhconv import convert
+
+from app.db import SessionLocal
+from app.models.author import Author
+from app.services.vector_store import search_poems_vector
 
 
 def _embed_device() -> str:
@@ -17,67 +18,22 @@ def _embed_device() -> str:
 
 
 def make_ef():
-    """BGE 要归一化；有 GPU 就用 GPU。Chroma 集合空间须是 cosine。"""
+    """BGE 要归一化；有 GPU 就用 GPU。只用来 embed 问句；ingest 仍可把同一函数喂给 Chroma。"""
+    from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
+
     return SentenceTransformerEmbeddingFunction(
         model_name=settings.embedding_model,
         device=_embed_device(),
         normalize_embeddings=True,
     )
-_client= None
-_collection= None
-_author_collection= None
-def _apply_search_ef(col) -> None:
-    """查询 ef 可改、不用重灌。默认 10 对 34 万偏紧。"""
-    ef = int(getattr(settings, "hnsw_search_ef", 64) or 64)
-    try:
-        meta = dict(col.metadata or {})
-        if int(meta.get("hnsw:search_ef") or 0) == ef:
-            return
-        meta.setdefault("hnsw:space", "cosine")
-        meta["hnsw:search_ef"] = ef
-        col.modify(metadata=meta)
-    except Exception:
-        pass
 
-
-def get_collection() -> chromadb.PersistentClient:
-    global _client,_collection
-    if _collection is None:
-        _client = chromadb.PersistentClient(path=str(Path(settings.chroma_persist_dir)))
-        _collection = _client.get_collection(name="poetry",embedding_function=make_ef())
-        _apply_search_ef(_collection)
-    return _collection
-
-def get_author_collection() -> chromadb.PersistentClient:
-    global _client,_author_collection
-    if _author_collection is None:
-        _client = chromadb.PersistentClient(path=str(Path(settings.chroma_persist_dir)))
-        _author_collection = _client.get_collection(name="authors",embedding_function=make_ef())
-    return _author_collection
 
 def search_poems(q: str, top_k: int = 5, where: dict | None = None) -> list[dict]:
     q = to_hans(q)
-    kwargs = {"query_texts": [q], "n_results": top_k}
-    if where:
-        kwargs["where"] = where
-    result = get_collection().query(**kwargs)
-    docs = result["documents"][0] if result.get("documents") else []
-    metas = result["metadatas"][0] if result.get("metadatas") else []
-    dists = result["distances"][0] if result.get("distances") else []
-    ids = result["ids"][0] if result.get("ids") else []
-    hits = []
-    for i, doc in enumerate(docs):
-        meta = (metas[i] if i < len(metas) else None) or {}
-        dist = float(dists[i]) if i < len(dists) else None
-        hits.append({
-            "id": ids[i] if i < len(ids) else None,
-            "text": doc,
-            "author": meta.get("author"),
-            "title": meta.get("title"),
-            "dynasty": meta.get("dynasty"),
-            "distance": dist,
-        })
-    return hits
+    author = None
+    if where and where.get("author"):
+        author = str(where.get("author") or "").strip() or None
+    return search_poems_vector(q, top_k=top_k, author=author)
 
 
 POEM_DISTANCE_MAX = settings.poem_distance_max
@@ -104,12 +60,14 @@ def _name_variants(name: str) -> list[str]:
 def get_author_bio(name: str) -> str | None:
     if not name:
         return None
-    col = get_author_collection()
-    for candidate in _name_variants(name):
-        got = col.get(where={"name": candidate}, limit=1)
-        docs = got.get("documents") or []
-        if docs:
-            return docs[0]
+    db = SessionLocal()
+    try:
+        for candidate in _name_variants(name):
+            row = db.query(Author).filter(Author.name == candidate).first()
+            if row and row.bio:
+                return row.bio
+    finally:
+        db.close()
     return None
 
 
@@ -122,14 +80,14 @@ def search_poems_by_author(q: str, author: str, top_k: int) -> list[dict]:
 
 
 def search_poems_by_title(title: str, limit: int = 15) -> list[dict]:
-    """标题精确命中，走 Postgres 倒排，不再扫 Chroma metadata。"""
+    """标题精确命中，走 Postgres 倒排。"""
     from app.services.fts import search_title
 
     return search_title(title, limit=limit)
 
 
 def search_poems_literal(q: str, limit: int = 5) -> list[dict]:
-    """正文/异名子串，走 pg_trgm，不再 Chroma $contains 全表扫。"""
+    """正文/异名子串，走 pg_trgm。"""
     from app.services.fts import search_contains
 
     return search_contains(q, limit=limit)

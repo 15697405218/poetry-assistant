@@ -89,6 +89,8 @@ class LLMClient:
                 kwargs = {
                     "model": self.model,
                     "messages": messages,
+                    "temperature": settings.chat_temperature,
+                    "top_p": settings.chat_top_p,
                 }
                 if tools:
                     kwargs["tools"] = tools
@@ -130,6 +132,8 @@ class LLMClient:
                     "model": self.model,
                     "messages": messages,
                     "stream": True,
+                    "temperature": settings.chat_temperature,
+                    "top_p": settings.chat_top_p,
                 }
                 if tools:
                     kwargs["tools"] = tools

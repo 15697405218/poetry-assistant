@@ -5,7 +5,7 @@
   python scripts/eval_rag.py --k 5
 
 指标按 query 宏平均。命中规则：作者/标题任一落在 gold 里，或 gold_keywords 出现在标题+正文。
-Chroma 未 ingest 时会直接失败。--skip-llm 不做消歧（省钱，full 变成术语+字面+双路+重排）。
+pgvector 未迁移时向量路为空。--skip-llm 不做消歧（省钱，full 变成术语+字面+双路+重排）。
 默认会把 dataset/eval_extra.jsonl 拼进主集；--no-extra 只跑 --path 那份（用来对比 42 条旧表）。
 """
 from __future__ import annotations

@@ -1,6 +1,6 @@
 """Redis：对话限流、消歧/检索缓存、登录锁定、JWT 登出黑名单、对话任务队列。
 
-连不上就降级跳过（登出除外；队列则由 API 改走进程内同步），Postgres / Chroma 仍是数据源。
+连不上就降级跳过（登出除外；队列则由 API 改走进程内同步），数据在 Postgres。
 """
 from __future__ import annotations
 

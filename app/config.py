@@ -41,6 +41,12 @@ class Settings(BaseSettings):
     gpu_max_inflight: int = 1
     job_ttl_seconds: int = 3600
     job_wait_seconds: int = 180
+    chat_temperature: float = 0.35
+    chat_top_p: float = 0.9
+    disambiguate_temperature: float = 0.0
+    disambiguate_max_tokens: int = 256
+    summarize_temperature: float = 0.0
+    summarize_max_tokens: int = 400
 
 
 def _overlay_yaml(data: Settings) -> Settings:

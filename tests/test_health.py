@@ -10,4 +10,5 @@ def test_health():
     assert r.json()["status"] == "ok"
     assert "index_version" in r.json()
     assert "fts_poems" in r.json()
+    assert "vector_poems" in r.json()
     assert "queue" in r.json()

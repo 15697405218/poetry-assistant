@@ -1,7 +1,14 @@
-# FastAPI / worker 在宿主机跑。这里只起 Postgres 和 Redis。
+# 默认只起 Postgres + Redis。
+# GPU worker：docker compose --profile app up -d
+# 本机 4060 演示仍建议宿主机 uvicorn + python scripts/worker.py（或 python -m app.worker）。
+# 容器里的 torch 是 CPU 轮、镜像很大，且不要和宿主机 worker 同时开（会抢同一块卡）。
 services:
   postgres:
-    image: postgres:16-alpine
+    # 在已有 postgres:16-alpine 上编 pgvector。不要 docker compose down -v。
+    build:
+      context: .
+      dockerfile: docker/postgres.Dockerfile
+    image: poetry-pgvector:16
     container_name: poetry-postgres
     restart: unless-stopped
     environment:
@@ -10,6 +17,7 @@ services:
       POSTGRES_DB: poetry
     ports:
       - "5432:5432"
+    shm_size: "2gb"
     volumes:
       - E:/poetry-assistant/data/postgres:/var/lib/postgresql/data
     healthcheck:
@@ -29,3 +37,23 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
+
+  worker:
+    profiles: ["app"]
+    build: .
+    container_name: poetry-worker
+    restart: unless-stopped
+    command: ["python", "-m", "app.worker"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://poetry:poetry@postgres:5432/poetry
+      REDIS_URL: redis://redis:6379/0
+      CHROMA_PERSIST_DIR: /app/data/chroma
+      TOKENIZERS_PARALLELISM: "false"
+    volumes:
+      - ./data/chroma:/app/data/chroma
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy

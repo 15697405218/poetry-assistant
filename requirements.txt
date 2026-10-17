@@ -1,7 +1,7 @@
 # Windows：
 #   set TOKENIZERS_PARALLELISM=false
 #   （app/config.py 已 setdefault；不关的话 rust tokenizers 可能 0xC0000005 把进程打崩）
-# uvicorn 不要加 --reload：Chroma HNSW 索引会在 reload 子进程里锁文件 / 直接崩。
+# uvicorn 不要加 --reload：会复制一份 GPU 模型、抢卡。
 # Tavily 走标准库 urllib.request，没有 tavily SDK，不要 pip install tavily。
 
 # API
@@ -21,6 +21,7 @@ bcrypt==4.0.1
 # Postgres / Redis
 sqlalchemy==2.0.36
 psycopg[binary]==3.2.3
+pgvector==0.3.6
 redis==5.2.1
 
 # LLM（火山 Ark，OpenAI 兼容 SDK）

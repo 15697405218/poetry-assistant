@@ -1,7 +1,9 @@
 from app.services.disambiguate import (
+    PARSE_ATTEMPTS,
     _extract_json,
     disambiguate_query,
     is_verse_lookup_query,
+    validate_disambiguate,
 )
 
 
@@ -61,7 +63,7 @@ def test_cipai_still_calls_llm(monkeypatch):
     monkeypatch.setattr("app.services.disambiguate.cache_set", lambda *_a, **_k: None)
     called = []
 
-    def fake_chat(messages, temperature=0):
+    def fake_chat(messages, temperature=0, **_k):
         called.append(messages[-1]["content"])
         return (
             '{"ambiguous": true, "keyword": "雨霖铃", "intent": "unknown",'
@@ -73,3 +75,56 @@ def test_cipai_still_calls_llm(monkeypatch):
     assert called == ["雨霖铃的意象"]
     assert out["confident"] is False
     assert out["query"] == "雨霖铃的意象"
+
+
+def test_validate_disambiguate_shape():
+    ok = {
+        "ambiguous": True,
+        "keyword": "雨霖铃",
+        "intent": "cipai",
+        "query": "词牌雨霖铃",
+        "confident": True,
+    }
+    assert validate_disambiguate(ok)["intent"] == "cipai"
+    assert validate_disambiguate({**ok, "intent": "nope"}) is None
+    assert validate_disambiguate({**ok, "extra": 1}) is None
+    assert validate_disambiguate({k: v for k, v in ok.items() if k != "query"}) is None
+
+
+def test_schema_miss_retries_then_original(monkeypatch):
+    monkeypatch.setattr("app.services.disambiguate.cache_get", lambda k: None)
+    stored = {}
+    monkeypatch.setattr("app.services.disambiguate.cache_set", lambda k, v: stored.__setitem__(k, v))
+    n = {"i": 0}
+
+    def fake_chat(*_a, **_k):
+        n["i"] += 1
+        return '{"intent": "cipai"}'
+
+    monkeypatch.setattr("app.services.disambiguate.llm.chat", fake_chat)
+    out = disambiguate_query("雨霖铃的意象")
+    assert n["i"] == PARSE_ATTEMPTS
+    assert out["confident"] is False
+    assert out["query"] == "雨霖铃的意象"
+    assert stored
+
+
+def test_schema_ok_on_retry(monkeypatch):
+    monkeypatch.setattr("app.services.disambiguate.cache_get", lambda k: None)
+    monkeypatch.setattr("app.services.disambiguate.cache_set", lambda *_a, **_k: None)
+    n = {"i": 0}
+
+    def fake_chat(*_a, **_k):
+        n["i"] += 1
+        if n["i"] == 1:
+            return "not json"
+        return (
+            '{"ambiguous": true, "keyword": "雨霖铃", "intent": "verse",'
+            ' "query": "诗句雨霖铃", "confident": true}'
+        )
+
+    monkeypatch.setattr("app.services.disambiguate.llm.chat", fake_chat)
+    out = disambiguate_query("雨霖铃的意象")
+    assert n["i"] == 2
+    assert out["confident"] is True
+    assert out["query"] == "诗句雨霖铃"

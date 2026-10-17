@@ -35,8 +35,13 @@ def ensure_schema() -> None:
             with engine.begin() as conn:
                 conn.execute(text("ALTER TABLE poem_keys ALTER COLUMN key TYPE VARCHAR(512)"))
     from app.services.fts import ensure_fts
+    from app.services.vector_store import ensure_pgvector
 
     try:
         ensure_fts()
+    except Exception:
+        pass
+    try:
+        ensure_pgvector()
     except Exception:
         pass
