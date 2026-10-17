@@ -1,6 +1,6 @@
-# 诗词助手（poetry-assistant）
+# RAG-Agent-Demo
 
-古诗词 RAG Agent：问句经术语改写与可选消歧后，走 Postgres 倒排 / `pg_trgm` 与 BGE 向量双路粗召，BGE-Reranker 精排，由 LangGraph 选择本库工具或联网。回答经 SSE 流出。GPU 上的 retrieve / generate 由独立 worker 经 Redis 队列消费，不与 API 进程抢同一块卡。
+古诗词语料上的 RAG Agent 示例：问句经术语改写与可选消歧后，走 Postgres 倒排 / `pg_trgm` 与 BGE 向量双路粗召，BGE-Reranker 精排，由 LangGraph 选择本库工具或联网。回答经 SSE 流出。GPU 上的 retrieve / generate 由独立 worker 经 Redis 队列消费，不与 API 进程抢同一块卡。
 
 向量模型 `BAAI/bge-large-zh-v1.5`（cosine，index v2），精排 `BAAI/bge-reranker-large`。检索算法标记 **`fts.v4`**（写入缓存 key）。诗词按篇目建向量，不做 chunk。
 
@@ -130,7 +130,7 @@ pytest tests -q
 ## 目录
 
 ```
-poetry-assistant/
+RAG-Agent-Demo/
 ├── README.md
 ├── requirements.txt
 ├── docker-compose.yml          # 默认只 postgres + redis

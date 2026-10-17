@@ -12,7 +12,7 @@ from app.api.chat import router as chat_router
 from app.api.conversations import router as conversations_router
 
 setup_logging()
-app = FastAPI(title="Poetry Assistant", description="a Poetry Assistant")
+app = FastAPI(title="RAG-Agent-Demo", description="RAG Agent demo over a poetry corpus")
 app.include_router(auth_router)
 app.include_router(chat_router)
 app.include_router(conversations_router)
